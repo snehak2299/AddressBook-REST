@@ -10,33 +10,40 @@ import com.bridglab.addressbook.model.AddressBookData;
 
 @Service
 public class AddressBookService implements IAddressBookService {
-private List<AddressBookData> addressbookList=new ArrayList<>();
+private List<AddressBookData> addressbookList1=new ArrayList<>();
+
+public List<AddressBookData> getAddressBookData() {
+	return addressbookList1;
+}
+
+public AddressBookData createContact(AddressBookDTO addressbookDTO) {
+	AddressBookData addressbookData=null;
+	addressbookData=new AddressBookData(1,addressbookDTO);
+	addressbookList1.add(addressbookData);
+	return addressbookData;
+}
+
+public AddressBookData updatedContact(int contactId, AddressBookDTO addressbookDTO) {
+	AddressBookData addressbookData=this.getcontactbyId(contactId);
+	addressbookData.setName(addressbookDTO.name);
+	addressbookData.setCity(addressbookDTO.city);
+	addressbookData.setPhoneNo(addressbookDTO.phoneNo);
+	addressbookList1.set(contactId-1, addressbookData);
+	return addressbookData;
+}
+
+
+@Override
+public AddressBookData getcontactbyId(int contactId) {
+	return addressbookList1.get(contactId-1);
+
+}
+
+@Override
+public void deleteAddressBook(int contactId) {
+	addressbookList1.remove(contactId-1);
 	
-	public List<AddressBookData> getAddressBookData() {
-		List<AddressBookData> addressbookList=new ArrayList<>();
-		addressbookList.add(new AddressBookData(1,new AddressBookDTO("sneha","kalyan","9892789234")));
-		return addressbookList;
-	}
+}
 
-	public AddressBookData getcontactbyId(int contactId) {
-		AddressBookData addressbookData=null;
-		addressbookData=new AddressBookData(2,new AddressBookDTO("Pankaj","kalyan","9892735509"));
-		return addressbookData;
-	}
 
-	public AddressBookData createContact(AddressBookDTO addressbookDTO) {
-		AddressBookData addressbookData=null;
-		addressbookData=new AddressBookData(1,addressbookDTO);
-		return addressbookData;
-	}
-
-	public AddressBookData updatedContact(int contactId, AddressBookDTO addressbookDTO) {
-		AddressBookData addressbookData=null;
-		addressbookData=new AddressBookData(contactId,addressbookDTO);
-		return addressbookData;
-	}
-
-	public void deleteAddressBook(int contactId) {
-		
-	}
 }

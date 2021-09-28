@@ -2,6 +2,8 @@ package com.bridglab.addressbook.model;
 
 import com.bridglab.addressbook.dto.AddressBookDTO;
 
+import lombok.Data;
+
 public class AddressBookData {
 	private int contactId;
 	public String name;
@@ -38,6 +40,7 @@ public class AddressBookData {
 	public void setPhoneNo(String phoneNo) {
 		this.phoneNo = phoneNo;
 	}
+
 	
 
 }

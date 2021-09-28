@@ -31,6 +31,7 @@ public class AddressBookController {
 		List<AddressBookData> addressbookData=null;
 		addressbookData=AddressBookService.getAddressBookData();
 		ResponseDTO respDTO=new ResponseDTO("Get call Success",addressbookData);
+		respDTO.getData();
 		return new ResponseEntity<ResponseDTO>(respDTO,HttpStatus.OK);
 	}
 	
