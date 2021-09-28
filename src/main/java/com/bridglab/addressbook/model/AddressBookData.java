@@ -4,7 +4,7 @@ import com.bridglab.addressbook.dto.AddressBookDTO;
 
 import lombok.Data;
 
-public class AddressBookData {
+public @Data class AddressBookData {
 	private int contactId;
 	public String name;
 	public String city;
@@ -16,31 +16,6 @@ public class AddressBookData {
 		this.city = addressbookdto.city;
 		this.phoneNo = addressbookdto.phoneNo;
 	}
-	public int getContactId() {
-		return contactId;
-	}
-	public void setContactId(int contactId) {
-		this.contactId = contactId;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getCity() {
-		return city;
-	}
-	public void setCity(String city) {
-		this.city = city;
-	}
-	public String getPhoneNo() {
-		return phoneNo;
-	}
-	public void setPhoneNo(String phoneNo) {
-		this.phoneNo = phoneNo;
-	}
-
 	
 
 }
