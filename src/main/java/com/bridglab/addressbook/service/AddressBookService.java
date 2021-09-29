@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.bridglab.addressbook.dto.AddressBookDTO;
+import com.bridglab.addressbook.exception.AddressBookException;
 import com.bridglab.addressbook.model.AddressBookData;
 
 @Service
@@ -35,7 +36,10 @@ public AddressBookData updatedContact(int contactId, AddressBookDTO addressbookD
 
 @Override
 public AddressBookData getcontactbyId(int contactId) {
-	return addressbookList1.get(contactId-1);
+	
+	return addressbookList1.stream().filter(empData->empData.getContactId()==contactId)
+			.findFirst()
+			.orElseThrow(()->new AddressBookException("contact id not found"));
 
 }
 
