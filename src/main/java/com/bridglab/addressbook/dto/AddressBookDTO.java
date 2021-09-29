@@ -1,6 +1,9 @@
 package com.bridglab.addressbook.dto;
 
+import javax.validation.constraints.Pattern;
+
 public class AddressBookDTO {
+	@Pattern(regexp="^[A-Z]{1}[a-zA-Z\\s]{2,}$",message="contact name Invalid") //validation added for name
 	public String name;
 	public String city;
 	public String phoneNo;
