@@ -56,6 +56,15 @@ public class AddressBookController {
 		return new ResponseEntity<ResponseDTO>(respDTO,HttpStatus.OK);
 	}
 	
+	@GetMapping("/type/{type}")
+	public ResponseEntity<ResponseDTO> getAddressBookData(@PathVariable("types") String types)
+	{
+		List<AddressBookData> contactList=null;
+		contactList=AddressBookService.getContactByType(types);
+		ResponseDTO respDTO=new ResponseDTO("Get call for ID SucessFul",contactList);
+		return new ResponseEntity<ResponseDTO>(respDTO,HttpStatus.OK);
+	}
+	
 	@PutMapping("/update/{contactId}") 
 	public ResponseEntity<ResponseDTO> updateAddressBookData(@PathVariable("contactId") int contactId,@Valid @RequestBody AddressBookDTO addressbookDTO){
 		AddressBookData addressbookData=AddressBookService.updatedContact(contactId, addressbookDTO);
