@@ -19,7 +19,7 @@ public List<AddressBookData> getAddressBookData() {
 
 public AddressBookData createContact(AddressBookDTO addressbookDTO) {
 	AddressBookData addressbookData=null;
-	addressbookData=new AddressBookData(1,addressbookDTO);
+	addressbookData=new AddressBookData(addressbookList1.size()+1,addressbookDTO);
 	addressbookList1.add(addressbookData);
 	return addressbookData;
 }
