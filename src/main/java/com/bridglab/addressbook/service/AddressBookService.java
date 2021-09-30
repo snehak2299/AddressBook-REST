@@ -11,7 +11,10 @@ import com.bridglab.addressbook.exception.AddressBookException;
 import com.bridglab.addressbook.model.AddressBookData;
 import com.bridglab.addressbook.reposiratory.AddressBookReposiratory;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class AddressBookService implements IAddressBookService {
 	
 	@Autowired
@@ -20,35 +23,30 @@ public class AddressBookService implements IAddressBookService {
 private List<AddressBookData> addressbookList1=new ArrayList<>();
 
 public List<AddressBookData> getAddressBookData() {
-	return addressbookList1;
+	return addressBookRepository.findAll();
 }
 
 public AddressBookData createContact(AddressBookDTO addressbookDTO) {
 	AddressBookData addressbookData=null;
-	addressbookData=new AddressBookData(addressbookList1.size()+1,addressbookDTO);
-	addressbookList1.add(addressbookData);
-	return addressbookData;
+	addressbookData=new AddressBookData(addressbookDTO);
+	
+	log.debug("AddressBook Data"+addressbookData.toString());
+	return addressBookRepository.save(addressbookData);
 }
 
 public AddressBookData updatedContact(int contactId, AddressBookDTO addressbookDTO) {
 	AddressBookData addressbookData=this.getcontactbyId(contactId);
-	addressbookData.setName(addressbookDTO.name);
-	addressbookData.setCity(addressbookDTO.city);
-	addressbookData.setPhoneNo(addressbookDTO.phoneNo);
-	addressbookData.setState(addressbookDTO.state);
-	addressbookData.setZip(addressbookDTO.zip);
-	addressbookData.setAddress(addressbookDTO.address);
-	addressbookList1.set(contactId-1, addressbookData);
-	return addressbookData;
+	addressbookData.updateAddressBookData(addressbookDTO);
+	return  addressBookRepository.save(addressbookData);
 }
 
 
 @Override
 public AddressBookData getcontactbyId(int contactId) {
 	
-	return addressbookList1.stream().filter(empData->empData.getContactId()==contactId)
-			.findFirst()
-			.orElseThrow(()->new AddressBookException("contact id not found"));
+	return addressBookRepository
+			.findById(contactId)
+			.orElseThrow(()->new AddressBookException("AddressBook not found"));
 
 }
 

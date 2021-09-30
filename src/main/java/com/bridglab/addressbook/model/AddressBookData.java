@@ -38,9 +38,12 @@ public @Data class AddressBookData {
 	@Column(name="type")
 	private List<String> types;
 	
-	public AddressBookData(int contactId,AddressBookDTO addressbookdto) {
-		super();
-		this.contactId = contactId;
+	public AddressBookData( AddressBookDTO addressbookdto) {
+		
+		this.updateAddressBookData(addressbookdto);
+	}
+	
+	public void updateAddressBookData(AddressBookDTO addressbookdto) {
 		this.name = addressbookdto.name;
 		this.city = addressbookdto.city;
 		this.phoneNo = addressbookdto.phoneNo;
